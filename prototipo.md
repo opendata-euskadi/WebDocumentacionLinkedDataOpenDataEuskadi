@@ -27,6 +27,20 @@ In Linked Data, resources are identified by URIs. This means that URIs should be
 
 So a real URI, identifying an observation of air quality that follows the [Data Cube](https://www.w3.org/TR/vocab-data-cube/) model, looks like: `<http://es.euskadi.eus/id/environment/air-quality/observation/AV-GASTEIZ-2017-01-26>`.
 
+The URIs in different languages that refer to the same entity are related with an `owl:sameAs` predicate. That means that, in order to combine data in different languages, the SPARQL endpoints must be federated with the SERVICE keyword:
+
+```
+PREFIX owl:
+SELECT *
+WHERE {
+<http://es.euskadi.eus/id/public-sector/administration/staff/inigo-urkullu> owl:sameAs ?s ;
+ ?p ?o .
+   SERVICE <http://eu.euskadi.eus/sparql> {
+           ?s ?f ?g
+   }
+}
+```
+
 URIs ELI?
 
 ## Content negotiation
@@ -42,6 +56,7 @@ The list of supported MIME types can be found at the [Blazegraph REST API docume
 Datasets: http://es.euskadi.eus/sparql?query=
 
 ## Relation between Web content and Named Graphs in the Triple Store
+
 JSON-LD
 
 ## To know more
@@ -54,23 +69,28 @@ JSON-LD
 * SPARQL (SPARQL Protocol and RDF Query Language): https://www.w3.org/TR/sparql11-query/
 * SHACL (Shapes Constraint Language): https://www.w3.org/TR/shacl/
 * SKOS (Simple Knowledge Organization System): https://www.w3.org/TR/2009/NOTE-skos-primer-20090818/
-* DCAT:
-* VOID:
-* PROV:
-* JSON-LD
-* Schema:
+* DCAT (Data Catalog Vocabulary): https://www.w3.org/TR/vocab-dcat/
+* VOID (Vocabulary of Interlinked Datasets): https://www.w3.org/TR/void/
+* PROV: https://www.w3.org/TR/prov-overview/
+* JSON-LD: https://www.w3.org/TR/json-ld/
+* Schema: http://schema.org/
 
-### Tools
+### Tools used in the project
 
-* ELDA
-* Yasgui
-* Blazegraph
-* RDF4J
-* Jena
+* ELDA: http://epimorphics.github.io/elda/
+* YASGUI: http://about.yasgui.org/
+* Blazegraph: https://www.blazegraph.com/
+* RDF4J: http://rdf4j.org/
+* Jena: http://jena.apache.org/
+* Protégé
 * FAIRifier/OpenRefine
 * Silk
-* Protégé
 * LODE (http://www.essepuntato.it/lode)
+
+### Online tools
+
+* W3C validator
+* Easy RDF converter
 
 ### Linked Open Data projects
 
@@ -99,8 +119,6 @@ JSON-LD
 * https://www.w3.org/Consortium/Persistence
 * https://www.w3.org/blog/2006/02/content-negotiation/
 
-### Books
-
 ### Linked Data Best Practices
 
 * NTI (https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380)
@@ -116,6 +134,3 @@ JSON-LD
 * Linked Data – Structured data on the Web (https://www.amazon.com/Linked-Data-Structured-Web/dp/1617290394)
 * Best practices for Publishing Linked Data (https://www.w3.org/TR/ld-bp/)
 * Best Practice Recipes for Publishing RDF Vocabularies (https://www.w3.org/TR/swbp-vocab-pub)
-
-
-
