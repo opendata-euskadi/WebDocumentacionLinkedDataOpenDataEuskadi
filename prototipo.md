@@ -17,19 +17,31 @@ In Open Data Euskadi, we have chosen data from different sources (Open Data Eusk
 
 ## URI policy
 
-In Linked Data, resources are identified by URIs. This means that URIs should be persistent and well defined (See bellow for the best practices we tried to follow). We have followed the [NTI](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380) scheme for URIs, with a caveat: instead of using the word "recurso", we are using the word "id" (Yes, we do know that a URI bears no semantics and therefore "recurso" is as good as any word, but we live in a community with two official languages and we think we should not favour one for the URIs). Therefore, you can expect the URIs at Open Data Euskadi look like: 
+In Linked Data, resources are identified by URIs. This means that URIs should be persistent and well defined (See bellow for the best practices we tried to follow). We have followed the [NTI](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380) scheme for URIs, with a caveat: instead of using the word "recurso", we are using the word "id" (Yes, we do know that a URI bears no semantics and therefore "recurso" is as good as any word, but we live in a community with two official languages and we think we should not favour one for the URIs). Therefore, you can expect the URIs at Open Data Euskadi to follow the pattern `http://{lang}.euskadi.eus/id/{sector}/{domain}/{ClassName}/{Identifier}`, where:
 
+* `lang`: the language of the resource, one of `eu` (basque) or `es` (spanish). Open Data euskadi follows the architecture of the DBpedia, in which datasets that pertain to different languages are stored in completely different servers.
+* `sector`: one of the sectors provided by the NTI (e.g. `environment`).
+* `domain`: the realm to which the resource belongs, defined by Open Data Euskadi (e.g. `air-quality`).
+* `ClassName`: the name of the class of which this resource is an instance. In other words, the name of the resource at the other end of the `rdf:type` predicate (e.g. ``observation`, from `http://purl.org/linked-data/cube#Observation`).
+* `Identifier`: a unique identifier, generated from the original data (e.g. `AV-GASTEIZ-2017-01-26`).
 
-http://{lang}.euskadi.eus/id/{sector}/{dominio}/{NombreClase}/{IdentificadorRecurso}
+So a real URI, identifying an observation of air quality that follows the [Data Cube](https://www.w3.org/TR/vocab-data-cube/) model, looks like: `<http://es.euskadi.eus/id/environment/air-quality/observation/AV-GASTEIZ-2017-01-26>`.
+
+URIs ELI?
 
 ## Content negotiation
 
-Supported MIME types https://wiki.blazegraph.com/wiki/index.php/REST_API#MIME_Types
+An important notion of Linked Data is that a URI identifies a resource (Iñigo Urkullu), but a resource can have different representations of the same content (An HTML page describing Iñigo Urkullu, RDF data describing Iñigo Urkullu, etc.). [Content negotiation](https://tools.ietf.org/html/rfc7231#section-3.4) is the process by which the server provides the appropriate representation for each client, according to the MIME type of the `Accept` header that the client provides (`text/html` for a web browser, `application/rdf+xml` for an RDF agent, etc.). The Content Negotiation at Open Data Euskadi is designed in the same way as in DBPedia. There is a URI with the token `resource` (`id` in our case), and the content negotiation process redirects the client with HTTP 303 codes to the appropriate URLs containing representations (`page` or `data` URLs). In the case of Open Data Euskadi there is an additional consideration since there are two types of pages: pages that represent only data (`doc`) and pages that represent web content that was transposed to RDF (`page`) (See Web content bellow). 
 
-## Relation between Open Data Euskadi datasets and Named Graphs
+![Content negotiation at Open Data Euskadi](img/content-negotiation.PNG)
+
+The list of supported MIME types can be found at the [Blazegraph REST API documentation](https://wiki.blazegraph.com/wiki/index.php/REST_API#MIME_Types).
+
+## Relation between Open Data Euskadi datasets and Named Graphs in the Triple Store
 
 Datasets: http://es.euskadi.eus/sparql?query=
 
+## Relation between Web content and Named Graphs in the Triple Store
 JSON-LD
 
 ## To know more
