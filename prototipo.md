@@ -3,7 +3,7 @@ Linked Open Data
 
 ## Introduction
 
-The main idea behind Open Data is to publish government data in the most interoperable and rich way, so that citizens and other institutions can build interesting applications and perform deep analyses. Linked Data offers a suitable technology to do so, through the so called Linked Open Data.
+The aim of Open Data initiatives like [Open Data Euskadi](http://opendata.euskadi.eus) is to publish government data in the most interoperable and rich way, so that citizens and other institutions can build interesting applications and perform deep analyses. Linked Data offers a suitable technology to do so, through the so called Linked Open Data.
 
 [![Five star Linked Open Data](img/5-star-steps.png)](http://5stardata.info)
 
@@ -11,18 +11,20 @@ The idea behind [Linked Data](https://www.w3.org/standards/semanticweb/data) is 
 
 [![Linked Open Data cloud](img/lod.png)](http://lod-cloud.net/versions/2017-08-22/lod.png)
 
-By publishing Linked Data, agents (humans or programs) can browser through links, like web browsing, and can perform interesting queries on combined data, since all the data is combined through links on the web.
+By publishing Open Data as Linked Data, 3rd parties (humans or programs) can browse the data through links and can perform interesting queries on integrated data.
 
 In Open Data Euskadi, we have chosen data from different sources (Open Data Euskadi catalog, Legegunea, web content, etc.) and we have converted it to Linked Data. This documentation is provided to make the consumption of such data easier to developers, citisens, journalists, etc.
 
+## Linked Data, RDF, SPARQL, OWL
+
 ## URI policy
 
-In Linked Data, resources are identified by URIs. This means that URIs should be persistent and well defined (See bellow for the best practices we tried to follow). We have followed the [NTI](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380) scheme for URIs, with a caveat: instead of using the word "recurso", we are using the word "id" (Yes, we do know that a URI bears no semantics and therefore "recurso" is as good as any word, but we live in a community with two official languages and we think we should not favour one for the URIs). Therefore, you can expect the URIs at Open Data Euskadi to follow the pattern `http://{lang}.euskadi.eus/id/{sector}/{domain}/{ClassName}/{Identifier}`, where:
+In Linked Data, resources are identified by URIs. This means that URIs should be persistent and well defined (See references bellow for best practices on URI policies). We have followed the [NTI](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380) scheme for URIs, with a caveat: instead of using the word "recurso", we are using the word "id" (Yes, we do know that a URI bears no semantics and therefore "recurso" is as good as any word, but we live in a community with two official languages and we think we should not favour one for the URIs). Therefore, you can expect the URIs at Open Data Euskadi to follow the pattern `http://{lang}.euskadi.eus/id/{sector}/{domain}/{ClassName}/{Identifier}`, where:
 
 * `lang`: the language of the resource, one of `eu` (basque) or `es` (spanish). Open Data euskadi follows the architecture of the DBpedia, in which datasets that pertain to different languages are stored in completely different servers.
 * `sector`: one of the sectors provided by the NTI (e.g. `environment`).
 * `domain`: the realm to which the resource belongs, defined by Open Data Euskadi (e.g. `air-quality`).
-* `ClassName`: the name of the class of which this resource is an instance. In other words, the name of the resource at the other end of the `rdf:type` predicate (e.g. ``observation`, from `http://purl.org/linked-data/cube#Observation`).
+* `ClassName`: the name of the class of which this resource is an instance. In other words, the name of the resource at the other end of the `rdf:type` predicate (e.g. `observation`, from `http://purl.org/linked-data/cube#Observation`).
 * `Identifier`: a unique identifier, generated from the original data (e.g. `AV-GASTEIZ-2017-01-26`).
 
 So a real URI, identifying an observation of air quality that follows the [Data Cube](https://www.w3.org/TR/vocab-data-cube/) model, looks like: `<http://es.euskadi.eus/id/environment/air-quality/observation/AV-GASTEIZ-2017-01-26>`.
@@ -46,7 +48,7 @@ def, kos, ....
 imagen de "gramatica de URIs" ?
 
 
-[URIs ELI](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/1)
+[[URIs ELI](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/1)]
 
 ## Content negotiation
 
@@ -62,7 +64,7 @@ The list of supported MIME types can be found at the [Blazegraph REST API docume
 
 ![Named Graphs at Open Data Euskadi](img/namedgraphs.png)
 
-The Named Graph and metadata mechanism is used in this project to add provenance information to the RDF datasets generated from [Open Data Euskadi](http://opendata.euskadi.eus/catalogo-datos/). Those datasets already have DCAT metadata, so the DCAT is "recycled" to obtain the metadata of the datasets that are created by converting existing Open Data Euskadi datasets to RDF (normally from CSV):
+The Named Graph and metadata mechanism is used in this project to add provenance information to the RDF datasets generated from [Open Data Euskadi datasets](http://opendata.euskadi.eus/catalogo-datos/). Those datasets already have DCAT metadata, so the DCAT is "recycled" to obtain the metadata of the datasets that are created by converting existing Open Data Euskadi datasets to RDF (normally from CSV):
 
 ![Named Graphs and DCAT at Open Data Euskadi](img/namedgraphs-DCAT.png)
 
