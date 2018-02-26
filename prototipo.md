@@ -41,6 +41,11 @@ WHERE {
 }
 ```
 
+def, kos, .... 
+
+imagen de "gramatica de URIs" ?
+
+
 URIs ELI?
 
 ## Content negotiation
@@ -57,7 +62,15 @@ The list of supported MIME types can be found at the [Blazegraph REST API docume
 
 ![Named Graphs at Open Data Euskadi](img/namedgraphs.png)
 
-![Named Graphs and DCAT at Open Data Euskadi](img/namedgraphs.png)
+The Named Graph and metadata mechanism is used in this project to add provenance information to the RDF datasets generated from [Open Data Euskadi](http://opendata.euskadi.eus/catalogo-datos/). Those datasets already have DCAT metadata, so the DCAT is "recycled" to obtain the metadata of the datasets that are created by converting existing Open Data Euskadi datasets to RDF (normally from CSV):
+
+![Named Graphs and DCAT at Open Data Euskadi](img/namedgraphs-DCAT.png)
+
+This means that SPARQL can be used to query data and metadata, using the DCAT graphs:
+
+```
+Example
+```
 
 Datasets: http://es.euskadi.eus/sparql?query=
 
