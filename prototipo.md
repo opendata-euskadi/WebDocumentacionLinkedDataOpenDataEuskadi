@@ -53,6 +53,12 @@ The list of supported MIME types can be found at the [Blazegraph REST API docume
 
 ## Relation between Open Data Euskadi datasets and Named Graphs in the Triple Store
 
+[Named Graphs](https://www.w3.org/TR/sparql11-query/#namedGraphs) provide a mechanism to organise RDF triples into meaningful groups, since a Named Graph is a collection of RDF statement, identified by a URI. Named Graphs are useful to organise the data in a Triple Store, and they also offer the possibility of recording the provenance of data in triples, since the URI of the named Graph can be the subject of more (metadata) triples.
+
+![Named Graphs at Open Data Euskadi](img/namedgraphs.png)
+
+![Named Graphs and DCAT at Open Data Euskadi](img/namedgraphs.png)
+
 Datasets: http://es.euskadi.eus/sparql?query=
 
 ## Relation between Web content and Named Graphs in the Triple Store
