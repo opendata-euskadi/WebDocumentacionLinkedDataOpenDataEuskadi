@@ -46,7 +46,7 @@ def, kos, ....
 imagen de "gramatica de URIs" ?
 
 
-URIs ELI?
+[URIs ELI](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/1)
 
 ## Content negotiation
 
@@ -66,17 +66,27 @@ The Named Graph and metadata mechanism is used in this project to add provenance
 
 ![Named Graphs and DCAT at Open Data Euskadi](img/namedgraphs-DCAT.png)
 
+Detail of DCAT:
+
+
 This means that SPARQL can be used to query data and metadata, using the DCAT graphs:
 
 ```
-Example
+DCAT SPARQL example
 ```
 
-Datasets: http://es.euskadi.eus/sparql?query=
+[Enlace directo a URL de query que consulta DCATs para datasets con distribucion RDF/XML](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/2)
+
+[Enlace directo a URL de query que consulta DCATs para datasets con distribucion Linked Data](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/2)
+
+[Enlace directo a URL de query que consulta DCATs para datasets con distribucion CSV?](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/2)
+
 
 ## Relation between Web content and Named Graphs in the Triple Store
 
-JSON-LD
+Many webs of the http://euskadi.eus domain have been annotated with terms from the Schema vocabulary (http://schema.org), adding [JSON-LD](https://json-ld.org/) snippets to them. Since JSON-LD is RDF, the content created for the webs is also stored in the Triple Store.
+
+[El contenido web tiene un DCAT?Named Graph URI del contenido web?](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/3)
 
 ## To know more
 
