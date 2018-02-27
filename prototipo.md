@@ -43,12 +43,16 @@ WHERE {
 }
 ```
 
+Resource URIs on the Legegunea site follow the URI pattern defined by the [European Legislation Identifier](http://eur-lex.europa.eu/eli-register/about.html) (ELI) project:
+
+```
+http://www.legegunea.euskadi.eus/eli/{jurisdiction}/{type}/{year}/{month}/{day}/{naturalidentifier}/{version}/{pointintime}/{language}/{format}
+```
+ 
+
 def, kos, .... 
 
 imagen de "gramatica de URIs" ?
-
-
-[[URIs ELI](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/1)]
 
 ## Content negotiation
 
