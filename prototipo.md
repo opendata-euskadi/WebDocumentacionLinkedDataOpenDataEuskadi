@@ -15,7 +15,35 @@ By publishing Open Data as Linked Data, 3rd parties (humans or programs) can bro
 
 In Open Data Euskadi, we have chosen data from different sources (Open Data Euskadi catalog, Legegunea, web content, etc.) and we have converted it to Linked Data. This documentation is provided to make the consumption of such data easier to developers, citisens, journalists, etc.
 
-## Linked Data, RDF, SPARQL, OWL
+## Technology stack
+
+### Linked Data
+
+Linked Data is based on following four principles:
+
+1. Identify every data item (entity or relationship) with a URI.
+
+2. Make those URIs Hypertext Transfer Protocol (HTTP) resolvable, that is, when the URI is requested a document containing information about the entity can be obtained.
+ 
+3. Provide the information using an open formatting standard when an entity is requested by HTTP. The format provided should be determined by HTTP content negotiation between the client and the server (e.g. RDF for an automatic agent, or Hypertext Markup Language (HTML) for a human user), so that the entity and its representations are decoupled. Importantly, the RDF format should always be available.
+
+4. Ensure, to the greatest extent possible, that the information provided by URI resolution contains typed relations to other entities, so that the agent can traverse those relations to discover new information, analogously to how humans browse the web. 
+
+### Resource Description Framework (RDF)
+
+RDF can be described as the "HTML for data" (https://www.w3.org/TR/rdf11-primer/): a shared language for representing data on the Web. RDF is based on representing data as triples of the form subject-predicate-object ("Bob"-"is interested in"-"Mona Lisa"): by adding this triples together, we obtain a graph. Each entity (subject, predicate, or object) is identified by a URI, except in the cases of objects, that can be literals. RDF can be stored in Triple Stores: Blazegraph is the one we use (https://www.blazegraph.com/).
+
+### SPARQL
+
+SPARQL is a query language for RDF (https://www.w3.org/TR/sparql11-overview/). A Triple Store exposes a SPARQL endpoint.
+
+### Web Ontology Language (OWL)
+
+OWL is a Knowledge Representation language to build ontologies (https://www.w3.org/TR/owl2-primer/). An ontology is a vocabulary we use to describe general properties about the data we publish, through axioms. All the entities in an OWL Ontology are identified by URIs, except literals.
+
+### Shapes Constraint Language (SHACL)
+
+SHACL is a language for validating RDF data (https://www.w3.org/TR/shacl/). With SHACL, constrained can be defined, and check whether an RDF graph complies with them.
 
 ## URI policy
 
@@ -104,15 +132,14 @@ Many webs of the http://euskadi.eus domain have been annotated with terms from t
 * Blazegraph: https://www.blazegraph.com/
 * RDF4J: http://rdf4j.org/
 * Jena: http://jena.apache.org/
-* Protégé
-* FAIRifier/OpenRefine
-* Silk
-* LODE (http://www.essepuntato.it/lode)
+* Protégé: https://protege.stanford.edu/
+* Silk: http://silkframework.org/
+* LODE: http://www.essepuntato.it/lode
 
 ### Online tools
 
-* W3C validator
-* Easy RDF converter
+* W3C RDF validator: https://www.w3.org/RDF/Validator/
+* Easy RDF converter: http://www.easyrdf.org/converter
 
 ### Linked Open Data projects
 
@@ -150,9 +177,9 @@ Many webs of the http://euskadi.eus domain have been annotated with terms from t
 * Data On the Web Best Practices (https://www.w3.org/TR/dwbp/)
 * Study on Persistent URIs (http://philarcher.org/diary/2013/uripersistence/)
 * Cool URIs for the Semantic Web (https://www.w3.org/TR/cooluris/)
-* Cool URIs don’t change (https://www.w3.org/Provider/Style/URI.html)
+* Cool URIs don't change (https://www.w3.org/Provider/Style/URI.html)
 * Linking Government data (http://www.springer.com/us/book/9781461417668)
-* Linked Data – Evolving the Web into a global Data Space (http://linkeddatabook.com/editions/1.0/)
-* Linked Data – Structured data on the Web (https://www.amazon.com/Linked-Data-Structured-Web/dp/1617290394)
+* Linked Data - Evolving the Web into a global Data Space (http://linkeddatabook.com/editions/1.0/)
+* Linked Data - Structured data on the Web (https://www.amazon.com/Linked-Data-Structured-Web/dp/1617290394)
 * Best practices for Publishing Linked Data (https://www.w3.org/TR/ld-bp/)
 * Best Practice Recipes for Publishing RDF Vocabularies (https://www.w3.org/TR/swbp-vocab-pub)
