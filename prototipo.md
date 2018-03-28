@@ -60,16 +60,20 @@ So a real URI, identifying an observation of air quality that follows the [Data 
 Resource URIs of RDF data that was obtained from [Legegunea](http://www.legegunea.euskadi.eus) site follow the URI pattern defined by the [European Legislation Identifier](http://eur-lex.europa.eu/eli-register/about.html) (ELI) project:
 
 ```
-http://www.legegunea.euskadi.eus/eli/{jurisdiction}/{type}/{year}/{month}/{day}/{naturalidentifier}/{version}/{pointintime}/{language}/{format}
+http://legegunea.euskadi.eus/eli/{jurisdiction}/{type}/{year}/{month}/{day}/{naturalidentifier}/{version}/{pointintime}/{language}/{format}
 ```
  
-def, kos, .... 
+Apart from resources, the followng entities also have URI schemes defined: 
 
-
+* OWL Classes: `http://euskadi.eus/def/{OntologyName}#{ClassName}`
+* OWL properties: `http://euskadi.eus/def/{OntologyName}#{PropertyName}`
+* OWL Ontology: `http://euskadi.eus/def/{OntologyName}`
+* SKOS Concept: `http://euskadi.eus/kos/{ConceptName}`
+* Linked Data distribution in a DCAT file: `http://euskadi.eus/distribution/{DistributionName}`
+* Named Graph: `http://euskadi.eus/graph/{NamedGraph}`
 
 ## Content negotiation
-
-An important notion of Linked Data is that a URI identifies a resource (Iñigo Urkullu), but a resource can have different representations of the same content (An HTML page describing Iñigo Urkullu, RDF data describing Iñigo Urkullu, etc.). [Content negotiation](https://tools.ietf.org/html/rfc7231#section-3.4) is the process by which the server provides the appropriate representation for each client, according to the MIME type of the `Accept` header that the client provides (`text/html` for a web browser, `application/rdf+xml` for an RDF agent, etc.). 
+An important notion of Linked Data is that a URI identifies a resource (Iñigo Urkullu), but a resource can have different representations of the same content (An HTML page describing Iñigo Urkullu, RDF data describing Iñigo Urkullu, etc.). [Content negotiation](https://tools.ietf.org/html/rfc7231#section-3.4) is the process by which the server provides the appropriate representation for each client, according to the MIME type of the `Accept` header that the client provides (`text/html` for a web browser, `application/rdf+xml` for an RDF agent, etc.)
 
 The Content Negotiation at Open Data Euskadi is designed in the same way as in DBPedia. There is a URI with the token  `id` (`resource` in DBpedia), and the content negotiation process redirects the client with HTTP 303 codes to the appropriate URLs containing representations (`page` or `data` URLs). In the case of Open Data Euskadi there is an additional consideration since there are two types of pages: pages that represent only data (`doc`) and pages that represent web content that was transposed to RDF (`page`) (See Web content bellow). 
 
