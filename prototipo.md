@@ -157,7 +157,7 @@ Many webs of the http://euskadi.eus domain have been annotated with terms from t
 
 * JSON-LD and why I hate the Semantic Web: http://manu.sporny.org/2014/json-ld-origins-2/
 * httpRange-14: What is the range of the HTTP dereference function?: https://www.w3.org/2001/tag/issues.html#httpRange-14
-* What is your RDF browser’s Accept header?: http://richard.cyganiak.de/blog/2008/03/what-is-your-rdf-browsers-accept-header/
+* What is your RDF browser's Accept header?: http://richard.cyganiak.de/blog/2008/03/what-is-your-rdf-browsers-accept-header/
 * Apache Content Negotiation: http://httpd.apache.org/docs/current/content-negotiation.html
 * Architecture of the World Wide Web, Volume One: https://www.w3.org/TR/webarch/
 * W3C URI persistence policy: https://www.w3.org/Consortium/Persistence
