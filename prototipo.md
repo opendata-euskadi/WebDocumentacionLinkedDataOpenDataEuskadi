@@ -137,7 +137,7 @@ dc:title "Calidad del aire Linked Data"@es .
 
 ```
 
-This means that SPARQL can be used to query data and metadata, using the DCAT graphs.
+This means that SPARQL can be used to [query data and metadata]().
 
 ## Relation between Web content and Named Graphs in the Triple Store
 
