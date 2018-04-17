@@ -3,11 +3,11 @@
 
 ## Introduction
 
-The aim of Open Data initiatives like [Open Data Euskadi](http://opendata.euskadi.eus) is to publish government data in the most interoperable and rich way, so that citizens and other institutions can build interesting applications and perform deep analyses. Linked Data offers a suitable technology to do so, through the so called Linked Open Data.
+The aim of Open Data initiatives like [Open Data Euskadi](http://opendata.euskadi.eus) is to publish government data in the most interoperable and rich way, so that citisens and other institutions can build interesting applications and perform deep analyses. Linked Data offers a suitable technology to do so, through the so called Linked Open Data.
 
 [![Five star Linked Open Data](img/5-star-steps.png)](http://5stardata.info)
 
-The idea behind [Linked Data](https://www.w3.org/standards/semanticweb/data) is to publish data directly on the Web, using current technologies, with standards like RDF, OWL, SHACL, and SPARQL. In order for such data to be useful, it must be identified with URIs, accesible through HTTP, and most importantly, linked to other Linked Data resources, to be a part of the Linked Open Data Cloud.
+The idea behind [Linked Data](https://www.w3.org/standards/semanticweb/data) is to publish data directly on the Web, using current technologies, with standards like RDF, OWL, SHACL, and SPARQL. In order for such data to be useful, it must be identified with URIs, accessible through HTTP, and most importantly, linked to external Linked Data resources, to be a part of the Linked Open Data Cloud.
 
 [![Linked Open Data cloud](img/lod.png)](http://lod-cloud.net/versions/2017-08-22/lod.png)
 
@@ -31,11 +31,11 @@ Linked Data is based on following four principles:
 
 ### Resource Description Framework (RDF)
 
-RDF can be described as the "HTML for data" (https://www.w3.org/TR/rdf11-primer/): a shared language for representing data on the Web. RDF is based on representing data as triples of the form subject-predicate-object ("Bob"-"is interested in"-"Mona Lisa"): by adding this triples together, we obtain a graph. Each entity (subject, predicate, or object) is identified by a URI, except in the cases of objects, that can be literals. RDF can be stored in Triple Stores: Blazegraph is the one we use (https://www.blazegraph.com/).
+RDF can be described as the "HTML for data" (https://www.w3.org/TR/rdf11-primer/): a shared language for representing data on the Web. RDF is based on representing data as triples of the form subject-predicate-object ("Bob"-"is interested in"-"Mona Lisa"): by gluing these triples together, we obtain a graph. Each entity (subject, predicate, or object) is identified by a URI, except objects, since they can be also literals instead of resources. RDF is stored in Triple Stores: Blazegraph is the one we use (https://www.blazegraph.com/).
 
 ### SPARQL
 
-SPARQL is a query language for RDF (https://www.w3.org/TR/sparql11-overview/). A Triple Store exposes a SPARQL endpoint.
+SPARQL is a query language for RDF and standard API for accessing SPARQL endpoints (https://www.w3.org/TR/sparql11-overview/). A Triple Store exposes a SPARQL endpoint.
 
 ### Web Ontology Language (OWL)
 
@@ -47,35 +47,43 @@ SHACL is a language for validating RDF data (https://www.w3.org/TR/shacl/). With
 
 ## URI policy
 
-In Linked Data, resources are identified by URIs. This means that URIs should be persistent and well defined (See references bellow for best practices on URI policies). We have followed the [NTI](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380) scheme for URIs, with a caveat: instead of using the word "recurso", we are using the word "id" (We are aware that a URI bears no semantics and therefore "recurso" is as good as any word, but we live in a community with two official languages and we think we should not favour one for the URIs). Therefore, you can expect the URIs at Open Data Euskadi to follow the pattern `http://euskadi.eus/id/{sector}/{domain}/{ClassName}/{Identifier}`, where:
+In Linked Data, resources are identified by URIs. This means that URIs should be persistent and well defined (See references bellow for best practices on URI policies). We have followed the [NTI](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380) scheme for URIs, with a caveat: instead of using the word "recurso", we are using the word "id" (We are aware that a URI bears no semantics and therefore "recurso" is as good as any word, but we live in a community with two official languages and we think we should not favor one over the other to build the URIs). Therefore, you can expect the URIs at Open Data Euskadi to follow the pattern `http://euskadi.eus/id/{sector}/{domain}/{ClassName}/{Identifier}`, where:
 
-* `sector`: one of the sectors provided by the NTI (e.g. `environment`), translated from spanish to english.
-* `domain`: the realm to which the resource belongs, defined by Open Data Euskadi (e.g. `air-quality`).
-* `ClassName`: the name of the class to which this resource belongs. In other words, the name of the resource at the other end of the `rdf:type` predicate (e.g. `observation`, from `http://purl.org/linked-data/cube#Observation`).
+* `sector`: one of the sectors provided by the NTI (e.g. `environment`), translated from spanish to english. The SKOS file with the sector names can be found [here]().
+* `domain`: the realm to which the resource belongs, defined by Open Data Euskadi (e.g. `air-quality`). The SKOS file with the domain names can be found [here]().
+* `ClassName`: the name of the class to which this resource belongs. In other words, the name of the resource at the other end of the `rdf:type` predicate (e.g. `observation`, from `http://purl.org/linked-data/cube#Observation`). See section "Ontologies used" bellow.
 * `Identifier`: a unique identifier, generated from the original data (e.g. `AV-GASTEIZ-2017-01-26`).
 
 So a real URI, identifying an observation of air quality that follows the [Data Cube](https://www.w3.org/TR/vocab-data-cube/) model, looks like: `http://euskadi.eus/id/environment/air-quality/observation/AV-GASTEIZ-2017-01-26`.
 
+Where:
+
+* `sector`:  `environment`).
+* `domain`: `air-quality`. 
+* `ClassName`: `observation`.
+* `Identifier`: `AV-GASTEIZ-2017-01-26`.
 
 Resource URIs of RDF data that was obtained from [Legegunea](http://www.legegunea.euskadi.eus) site follow the URI pattern defined by the [European Legislation Identifier](http://eur-lex.europa.eu/eli-register/about.html) (ELI) project:
 
+
 ```
-http://legegunea.euskadi.eus/eli/{jurisdiction}/{type}/{year}/{month}/{day}/{naturalidentifier}/{version}/{pointintime}/{language}/{format}
+http://euskadi.eus/eli/{jurisdiction}/{type}/{year}/{month}/{day}/{naturalidentifier}/{version}/{pointintime}/{language}/{format}
 ```
  
-Apart from resources, the followng entities also have URI schemes defined: 
+Apart from resources, the following entities also have URI schemes defined: 
 
 * OWL Classes: `http://euskadi.eus/def/{OntologyName}#{ClassName}`.
 * OWL properties: `http://euskadi.eus/def/{OntologyName}#{PropertyName}`.
 * OWL Ontology: `http://euskadi.eus/def/{OntologyName}`.
 * SKOS Concept: `http://euskadi.eus/kos/{ConceptName}`.
-* Linked Data distribution in a DCAT file: `http://euskadi.eus/distribution/{DistributionName}`.
-* Named Graph: `http://euskadi.eus/graph/{NamedGraph}`.
+* Dataset in a DCAT file: `http://euskadi.eus/dataset/{NamedGraph}`.
+* Distribution in a DCAT file: `http://euskadi.eus/distribution/{NamedGraph}/[lang]/format`. `lang` is optional.
+* Named Graph in a DCAT file or Triple Store: `http://euskadi.eus/graph/{NamedGraph}`.
 
 ## Content negotiation
 An important notion of Linked Data is that a URI identifies a resource (Iñigo Urkullu), but a resource can have different representations of the same content (An HTML page describing Iñigo Urkullu, RDF data describing Iñigo Urkullu, etc.). [Content negotiation](https://tools.ietf.org/html/rfc7231#section-3.4) is the process by which the server provides the appropriate representation for each client, according to the MIME type of the `Accept` header provided by the client (`text/html` for a web browser, `application/rdf+xml` for an RDF agent, etc.)
 
-The Content Negotiation at Open Data Euskadi is designed in the same way as in DBPedia. There is a URI with the token  `id` (`resource` in DBpedia), and the content negotiation process redirects the client with HTTP 303 codes to the appropriate URLs containing representations (`page` or `data` URLs). In the case of Open Data Euskadi there is an additional consideration since there are two types of pages: pages that represent only data (`doc`) and pages that represent web content that was transposed to RDF (`page`) (See Web content bellow). 
+The Content Negotiation at Open Data Euskadi is designed in the same way as in DBPedia. There is a URI with the token `id` (`resource` in DBpedia), and the content negotiation process redirects the client with HTTP 303 codes to the appropriate URLs containing representations (`page` or `data` URLs). In the case of Open Data Euskadi there is an additional consideration since there are two types of pages: pages that represent only data (`doc`) and pages that represent web content that was transposed to RDF (`page`) (See Web content bellow). 
 
 ![Content negotiation at Open Data Euskadi](img/content-negotiation.PNG)
 
@@ -91,20 +99,53 @@ The Named Graph and metadata mechanism is used at Open Data Euskadi to add prove
 
 ![Named Graphs and DCAT at Open Data Euskadi](img/namedgraphs-DCAT.png)
 
-This means that SPARQL can be used to query data and metadata, using the DCAT graphs:
+This excerpt from a DCAT file shows the appropriate triples (Not all the triples are shown):
 
-[Enlace directo a URL de query que consulta DCATs para datasets con distribucion RDF/XML](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/2)
+```
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 
-[Enlace directo a URL de query que consulta DCATs para datasets con distribucion Linked Data](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/2)
+# The main dataset has two distributions: a CSV file and the RDF stored in the Triple Store
+<http://opendata.euskadi.eus/dataset/calidad-aire-en-euskadi-2017/> dcat:distribution 
+	<http://es.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/es/csv>, 
+	<http://es.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/lod> .
 
-[Enlace directo a URL de query que consulta DCATs para datasets con distribucion CSV?](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/2)
+# CSV distribution	
+<http://es.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/es/csv>
+  a dcat:Distribution ;
+  dc:format [
+    a dc:IMT ;
+    rdfs:label "CSV" ;
+    rdf:value "text/csv"
+  ] ;
+  dcat:byteSize 0.0 ;
+  dcat:accessURL "http://es.euskadi.eus/contenidos/ds_informes_estudios/calidad_aire_2017/es_def/adjuntos/datos_diarios_csv.zip"^^xsd:anyURI ;
+  dc:title "Calidad del aire"@es .	
+	
+# Linked Data distribution
+<http://es.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/lod> a dcat:Distribution, void:Dataset, schema:Distribution ;
+sd:namedGraph <http://es.euskadi.eus/graph/calidad-aire-en-euskadi-2017>;
+void:sparqlEndpoint <http://euskadi.eus/sparql/> ;
+dc:modified "2008-11-17"^^xsd:date ;
+dc:title "Calidad del aire Linked Data"@es .
 
+```
+
+This means that SPARQL can be used to query data and metadata, using the DCAT graphs.
 
 ## Relation between Web content and Named Graphs in the Triple Store
 
 Many webs of the http://euskadi.eus domain have been annotated with terms from the Schema vocabulary (http://schema.org), adding [JSON-LD](https://json-ld.org/) snippets to them. Since JSON-LD is RDF, the content created for the webs is also stored in the Triple Store.
 
 [El contenido web tiene un DCAT?Named Graph URI del contenido web?](https://github.com/opendata-euskadi/WebDocumentacionLinkedDataOpenDataEuskadi/issues/3)
+
+## Ontologies used
 
 ## To know more
 
