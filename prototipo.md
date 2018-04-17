@@ -147,6 +147,8 @@ Many webs of the http://euskadi.eus domain have been annotated with terms from t
 
 ## Ontologies used
 
+Even though different ontologies have been used in the RDF data, the URIs of the classes and properties of such ontologies can be found in [Euskadipedia](), the OWL ontology we maintain with external and internal entities.
+
 ## To know more
 
 ### Specifications, standards, and general purpose vocabularies
