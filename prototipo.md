@@ -85,7 +85,7 @@ An important notion of Linked Data is that a URI identifies a resource (Iñigo Ur
 
 The Content Negotiation at Open Data Euskadi is designed in the same way as in DBpedia. There is a URI with the token `id` (`resource` in DBpedia), and the content negotiation process redirects the client with HTTP 303 codes to the appropriate URLs containing representations (`page` or `data` URLs). In the case of Open Data Euskadi there is an additional consideration since there are two types of pages: pages that represent only data (`doc`) and pages that represent web content that was transposed to RDF (`page`) (See section "Relation between Web content and Named Graphs in the Triple Store" bellow). 
 
-![Content negotiation at Open Data Euskadi](img/content-negotiation.PNG)
+![Content negotiation at Open Data Euskadi](img/content-negotiation.jpg)
 
 The list of supported MIME types can be found at the [RDF4J REST API documentation](http://docs.rdf4j.org/rest-api/#_content_types).
 
@@ -93,11 +93,11 @@ The list of supported MIME types can be found at the [RDF4J REST API documentati
 
 [Named Graphs](https://www.w3.org/TR/sparql11-query/#namedGraphs) provide a mechanism to organise RDF triples into meaningful groups, since a Named Graph is a collection of RDF statements identified by a URI. Named Graphs are useful to organise the data in a Triple Store, and they also offer the possibility of recording the provenance of data in triples, since the URI of the named Graph can be the subject of more (metadata) triples.
 
-![Named Graphs at Open Data Euskadi](img/namedgraphs.png)
+![Named Graphs at Open Data Euskadi](img/namedgraphs.jpg)
 
 The Named Graph and metadata mechanism is used at Open Data Euskadi to add provenance information to the RDF datasets generated from [Open Data Euskadi datasets](http://opendata.euskadi.eus/catalogo-datos/). Those datasets already have DCAT metadata, so the DCAT is "recycled" to obtain the metadata of the datasets that are created by converting existing Open Data Euskadi datasets to RDF (normally from CSV):
 
-![Named Graphs and DCAT at Open Data Euskadi](img/namedgraphs-DCAT.png)
+![Named Graphs and DCAT at Open Data Euskadi](img/namedgraphs-DCAT.jpg)
 
 This excerpt from a DCAT file shows the appropriate triples (Not all the triples are shown):
 
