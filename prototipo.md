@@ -3,7 +3,7 @@
 
 ## Introduction
 
-The aim of Open Data initiatives like [Open Data Euskadi](http://opendata.euskadi.eus) is to publish government data in the most interoperable and rich way, so that citisens and other institutions can build interesting applications and perform deep analyses. Linked Data offers a suitable technology to do so, through the so called Linked Open Data.
+The aim of Open Data initiatives like [Open Data Euskadi](http://opendata.euskadi.eus) is to publish government data in the most interoperable and rich way, so that citisens and other institutions can build interesting applications and perform deep analyses with the data. Linked Data offers a suitable technology to do so, through the so called Linked Open Data.
 
 [![Five star Linked Open Data](img/5-star-steps.png)](http://5stardata.info)
 
@@ -31,19 +31,19 @@ Linked Data is based on following four principles:
 
 ### Resource Description Framework (RDF)
 
-RDF can be described as the "HTML for data" (https://www.w3.org/TR/rdf11-primer/): a shared language for representing data on the Web. RDF is based on representing data as triples of the form subject-predicate-object ("Bob"-"is interested in"-"Mona Lisa"): by gluing these triples together, we obtain a graph. Each entity (subject, predicate, or object) is identified by a URI, except objects, since they can be also literals instead of resources. RDF is stored in Triple Stores: [GraphDB](http://graphdb.ontotext.com/) is the one we use, through the RDF Java Framewor [RDF4J](http://rdf4j.org/).
+RDF can be described as the ["HTML for data"](https://www.w3.org/TR/rdf11-primer/): a shared language for representing data on the Web. RDF is based on representing data as subject-predicate-object triples ("Bob"-"is interested in"-"Mona Lisa"): by gluing these triples together, we obtain a graph. Each entity (subject, predicate, or object) is identified by a URI, except objects, since they can also be literals (Numeric data, Strings, etc. -- see [XSD Datatypes](https://www.w3.org/TR/xmlschema-2/) -- ). RDF is stored in Triple Stores: [GraphDB](http://graphdb.ontotext.com/) is the one we use, through the RDF Java Framewor [RDF4J](http://rdf4j.org/).
 
 ### SPARQL
 
-SPARQL is a query language for RDF and standard API for accessing SPARQL endpoints (https://www.w3.org/TR/sparql11-overview/). A Triple Store exposes a SPARQL endpoint.
+[SPARQL](https://www.w3.org/TR/sparql11-overview/) is a query language for RDF and standard API for accessing SPARQL endpoints. A Triple Store exposes a SPARQL endpoint.
 
 ### Web Ontology Language (OWL)
 
-OWL is a Knowledge Representation language to build ontologies (https://www.w3.org/TR/owl2-primer/). An ontology is a vocabulary we use to describe general properties about the data we publish, through axioms. All the entities in an OWL Ontology are identified by URIs, except literals.
+[OWL](https://www.w3.org/TR/owl2-primer/) is a Knowledge Representation language to build ontologies. An ontology is a vocabulary we use to describe general properties about the data we publish, through axioms. All the entities in an OWL Ontology are identified by URIs, except literals.
 
 ### Shapes Constraint Language (SHACL)
 
-SHACL is a language for validating RDF data (https://www.w3.org/TR/shacl/). With SHACL, constrains can be defined, and check whether an RDF graph complies with them.
+[SHACL](https://www.w3.org/TR/shacl/) is a language for validating RDF data. With SHACL, constrains can be defined, and check whether an RDF graph complies with them.
 
 ## URI policy
 
