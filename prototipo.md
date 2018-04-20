@@ -47,14 +47,14 @@ RDF can be described as the ["HTML for data"](https://www.w3.org/TR/rdf11-primer
 
 ## URI policy
 
-In Linked Data, resources are identified by URIs. This means that URIs should be persistent and well defined (See references bellow for best practices on URI policies). We have followed the [NTI](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380) scheme for URIs, with a caveat: instead of using the word "recurso", we are using the word "id" (We are aware that a URI bears no semantics and therefore "recurso" is as good as any word, but we live in a community with two official languages and we think we should not favor one over the other to build the URIs). Therefore, you can expect the resource URIs at Open Data Euskadi to follow the pattern `http://data.euskadi.eus/id/{Sector}/{Domain}/{ClassName}/{Identifier}`, where:
+In Linked Data, resources are identified by URIs. This means that URIs should be persistent and well defined (See "Linked Data Best Practices" references bellow). We have followed the [NTI](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380) scheme for URIs, with a caveat: instead of using the word "recurso", we are using the word "id" (We are aware that a URI bears no semantics and therefore "recurso" is as good as any word, but we live in a community with two official languages and we think we should not favor one over the other to build the URIs). Therefore, you can expect the resource URIs at Open Data Euskadi to follow the pattern `http://data.euskadi.eus/id/{Sector}/{Domain}/{ClassName}/{Identifier}`, where:
 
 * `Sector`: one of the sectors provided by the NTI (e.g. `environment`), translated from spanish to english. The SKOS file with the sector names can be found [here]().
 * `Domain`: the realm to which the resource belongs, defined by Open Data Euskadi (e.g. `air-quality`). The SKOS file with the domain names can be found [here]().
 * `ClassName`: the name of the class to which this resource belongs. In other words, the name of the resource at the other end of the `rdf:type` predicate (e.g. `observation`, from `http://purl.org/linked-data/cube#Observation`). See section "Ontologies used" bellow.
 * `Identifier`: a unique identifier, generated from the original data (e.g. `AV-GASTEIZ-2017-01-26`).
 
-So a real URI, identifying an observation of air quality that follows the [Data Cube](https://www.w3.org/TR/vocab-data-cube/) model, looks like: `http://data.euskadi.eus/id/environment/air-quality/observation/AV-GASTEIZ-2017-01-26`.
+Therefore a real URI, identifying an observation of air quality that follows the [Data Cube](https://www.w3.org/TR/vocab-data-cube/) model, looks like: `http://data.euskadi.eus/id/environment/air-quality/observation/AV-GASTEIZ-2017-01-26`.
 
 Where:
 
@@ -81,9 +81,9 @@ Apart from resources, the following entities also have URI schemes defined:
 * Named Graph in a DCAT file or Triple Store: `http://data.euskadi.eus/graph/{NamedGraph}`.
 
 ## Content negotiation
-An important notion of Linked Data is that a URI identifies a resource (Iñigo Urkullu), but a resource can have different representations of the same content (An HTML page describing Iñigo Urkullu, RDF data describing Iñigo Urkullu, etc.). [Content negotiation](https://tools.ietf.org/html/rfc7231#section-3.4) is the process by which the server provides the appropriate representation for each client, according to the MIME type of the `Accept` header provided by the client (`text/html` for a web browser, `application/rdf+xml` for an RDF agent, etc.)
+An important notion of Linked Data is that a URI identifies a resource (Iñigo Urkullu), but a resource can have different representations of the same content (An HTML page describing Iñigo Urkullu, RDF data describing Iñigo Urkullu, etc.). [Content negotiation](https://tools.ietf.org/html/rfc7231#section-3.4) is the process by which the server provides the appropriate representation for each client, according to the MIME type of the `Accept` header provided by the client (`text/html` for a web browser, `application/rdf+xml` for an RDF agent, etc.).
 
-The Content Negotiation at Open Data Euskadi is designed in the same way as in DBpedia. There is a URI with the token `id` (`resource` in DBpedia), and the content negotiation process redirects the client with HTTP 303 codes to the appropriate URLs containing representations (`page` or `data` URLs). In the case of Open Data Euskadi there is an additional consideration since there are two types of pages: pages that represent only data (`doc`) and pages that represent web content that was transposed to RDF (`page`) (See section "Relation between Web content and Named Graphs in the Triple Store" bellow). 
+The content negotiation process at Open Data Euskadi is designed in the same way as in DBpedia. There is a URI with the token `id` (`resource` in DBpedia), and the content negotiation process redirects the client with HTTP 303 codes to the appropriate URLs containing representations (`page` or `data` URLs). In the case of Open Data Euskadi there is an additional consideration since there are two types of pages: pages that represent only data (`doc`) and pages that represent web content that was transposed to RDF (`page`) (See section "Relation between Web content and Named Graphs in the Triple Store" bellow). 
 
 ![Content negotiation at Open Data Euskadi](img/content-negotiation.jpg)
 
@@ -95,7 +95,7 @@ The list of supported MIME types can be found at the [RDF4J REST API documentati
 
 ![Named Graphs at Open Data Euskadi](img/namedgraphs.jpg)
 
-The Named Graph and metadata mechanism is used at Open Data Euskadi to add provenance information to the RDF datasets generated from [Open Data Euskadi datasets](http://opendata.euskadi.eus/catalogo-datos/). Those datasets already have DCAT metadata, so the DCAT is "recycled" to obtain the metadata of the datasets that are created by converting existing Open Data Euskadi datasets to RDF (normally from CSV):
+The Named Graph and metadata mechanism is used at Open Data Euskadi to add provenance information to the RDF datasets generated from [Open Data Euskadi datasets](http://opendata.euskadi.eus/catalogo-datos/). Those datasets already have DCAT metadata, so the DCAT is "recycled" to obtain the metadata of the datasets that are created by converting existing Open Data Euskadi datasets to RDF (normally from CSV).
 
 ![Named Graphs and DCAT at Open Data Euskadi](img/namedgraphs-DCAT.jpg)
 
@@ -141,7 +141,7 @@ This means that SPARQL can be used to [query data and metadata]().
 
 ## Relation between Web content and Named Graphs in the Triple Store
 
-Many webs of the http://euskadi.eus domain have been annotated with terms from the Schema vocabulary (http://schema.org), adding [JSON-LD](https://json-ld.org/) snippets to them. Since JSON-LD is RDF, the content created for the webs is also stored in the Triple Store.
+Many webs of the [euskadi.eus](http://euskadi.eus) domain have been annotated with terms from the [Schema vocabulary](http://schema.org), adding [JSON-LD](https://json-ld.org/) snippets to them. Since JSON-LD is RDF, the content created for the webs is also stored in the Triple Store.
 
 ## Ontologies used
 
