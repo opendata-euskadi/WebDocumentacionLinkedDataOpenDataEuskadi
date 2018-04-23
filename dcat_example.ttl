@@ -8,12 +8,12 @@
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 
 # The main dataset has two distributions: a CSV file and the RDF stored in the Triple Store
-<http://opendata.euskadi.eus/dataset/calidad-aire-en-euskadi-2017/> dcat:distribution 
-	<http://es.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/es/csv>, 
-	<http://es.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/lod> .
+<http://data.euskadi.eus/dataset/calidad-aire-en-euskadi-2017/> dcat:distribution 
+	<http://data.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/es/csv>, 
+	<http://data.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/lod> .
 
 # CSV distribution	
-<http://es.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/es/csv>
+<http://data.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/es/csv>
   a dcat:Distribution ;
   dc:format [
     a dc:IMT ;
@@ -25,8 +25,8 @@
   dc:title "Calidad del aire"@es .	
 	
 # Linked Data distribution
-<http://es.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/lod> a dcat:Distribution, void:Dataset, schema:Distribution ;
-sd:namedGraph <http://es.euskadi.eus/graph/calidad-aire-en-euskadi-2017>;
-void:sparqlEndpoint <http://euskadi.eus/sparql/> ;
+<http://data.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/lod> a dcat:Distribution, void:Dataset, schema:Distribution ;
+sd:namedGraph <http://data.euskadi.eus/graph/calidad-aire-en-euskadi-2017>;
+void:sparqlEndpoint <http://data.euskadi.eus/sparql/> ;
 dc:modified "2008-11-17"^^xsd:date ;
 dc:title "Calidad del aire Linked Data"@es .
