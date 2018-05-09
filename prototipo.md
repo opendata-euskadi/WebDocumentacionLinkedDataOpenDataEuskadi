@@ -49,25 +49,24 @@ RDF can be described as the ["HTML for data"](https://www.w3.org/TR/rdf11-primer
 
 In Linked Data, resources are identified by URIs. This means that URIs should be persistent and well defined (See "Linked Data Best Practices" references bellow). We have followed the [NTI](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380) scheme for URIs, with a caveat: instead of using the word "recurso", we are using the word "id" (We are aware that a URI bears no semantics and therefore "recurso" is as good as any word, but we live in a community with two official languages and we think we should not favor one over the other to build the URIs). Therefore, you can expect the resource URIs at Open Data Euskadi to follow the pattern `http://data.euskadi.eus/id/{Sector}/{Domain}/{ClassName}/{Identifier}`, where:
 
-* `Sector`: one of the sectors provided by the NTI (e.g. `environment`), translated from spanish to english. The SKOS file with the sector names can be found [here]().
-* `Domain`: the realm to which the resource belongs, defined by Open Data Euskadi (e.g. `air-quality`). The SKOS file with the domain names can be found [here]().
-* `ClassName`: the name of the class to which this resource belongs. In other words, the name of the resource at the other end of the `rdf:type` predicate (e.g. `observation`, from `http://purl.org/linked-data/cube#Observation`). See section "Ontologies used" bellow.
-* `Identifier`: a unique identifier, generated from the original data (e.g. `AV-GASTEIZ-2017-01-26`).
+* `Sector`: one of the sectors provided by the NTI (e.g. `public-sector`), translated from spanish to english. The SKOS file with the sector names can be found [here](https://raw.githubusercontent.com/opendata-euskadi/SKOS-taxonomies/master/sectores-nti/skosnti.rdf).
+* `Domain`: the realm to which the resource belongs, defined by Open Data Euskadi (e.g. `government`). The SKOS file with the domain names can be found [here](https://raw.githubusercontent.com/opendata-euskadi/SKOS-taxonomies/master/estructura-administracion/grafo.rdf).
+* `ClassName`: the name of the class to which this resource belongs. In other words, the name of the resource at the other end of the `rdf:type` predicate (e.g. `GovernmentalAdministrativeRegion`, from `http://dbpedia.org/ontology/GovernmentalAdministrativeRegion`). See section "Ontologies used" bellow.
+* `Identifier`: a unique identifier, generated from the original data (e.g. `euskadi`).
 
-Therefore a real URI, identifying an observation of air quality that follows the [Data Cube](https://www.w3.org/TR/vocab-data-cube/) model, looks like: `http://data.euskadi.eus/id/environment/air-quality/observation/AV-GASTEIZ-2017-01-26`.
+Therefore a real URI, identifying an observation of air quality that follows the [Data Cube](https://www.w3.org/TR/vocab-data-cube/) model, looks like: `http://data.euskadi.eus/id/public-sector/government/GovernmentalAdministrativeRegion/euskadi`.
 
 Where:
 
-* `Sector`:  `environment`.
-* `Domain`: `air-quality`. 
-* `ClassName`: `observation`.
-* `Identifier`: `AV-GASTEIZ-2017-01-26`.
+* `Sector`:  `public-sector`.
+* `Domain`: `government`. 
+* `ClassName`: `GovernmentalAdministrativeRegion`.
+* `Identifier`: `euskadi`.
 
 Resource URIs of RDF data that was obtained from the [Legegunea](http://www.legegunea.euskadi.eus) service follow the URI pattern defined by the [European Legislation Identifier](http://eur-lex.europa.eu/eli-register/about.html) (ELI) project:
 
-
 ```
-http://euskadi.eus/eli/{jurisdiction}/{type}/{year}/{month}/{day}/{naturalidentifier}/{version}/{pointintime}/{language}/{format}
+http://data.euskadi.eus/eli/{jurisdiction}/{type}/{year}/{month}/{day}/{naturalidentifier}/{version}/{pointintime}/{language}/{format}
 ```
  
 Apart from resources, the following entities also have URI schemes defined: 
@@ -76,12 +75,12 @@ Apart from resources, the following entities also have URI schemes defined:
 * OWL properties: `http://data.euskadi.eus/def/{OntologyName}#{PropertyName}`.
 * OWL Ontology: `http://data.euskadi.eus/def/{OntologyName}`.
 * SKOS Concept: `http://data.euskadi.eus/kos/{ConceptName}`.
-* Dataset in a DCAT file: `http://data.euskadi.eus/dataset/{NamedGraph}`.
-* Distribution in a DCAT file: `http://data.euskadi.eus/distribution/{NamedGraph}/[lang]/format`. `lang` is optional.
-* Named Graph in a DCAT file or Triple Store: `http://data.euskadi.eus/graph/{NamedGraph}`.
+* Dataset in a DCAT file: `http://data.euskadi.eus/dataset/{NamedGraph}`. For example, `http://data.euskadi.eus/dataset/bopv-european-legislation-identifier-eli/`.
+* Distribution in a DCAT file: `http://data.euskadi.eus/distribution/{NamedGraph}/[lang]/format`. `lang` is optional. For example, `http://data.euskadi.eus/distribution/bopv-european-legislation-identifier-eli/lod`.
+* Named Graph in a DCAT file or Triple Store: `http://data.euskadi.eus/graph/{NamedGraph}`. For example, `http://data.euskadi.eus/graph/bopv-european-legislation-identifier-eli`.
 
 ## Content negotiation
-An important notion of Linked Data is that a URI identifies a resource (Iñigo Urkullu), but a resource can have different representations of the same content (An HTML page describing Iñigo Urkullu, RDF data describing Iñigo Urkullu, etc.). [Content negotiation](https://tools.ietf.org/html/rfc7231#section-3.4) is the process by which the server provides the appropriate representation for each client, according to the MIME type of the `Accept` header provided by the client (`text/html` for a web browser, `application/rdf+xml` for an RDF agent, etc.).
+An important notion of Linked Data is that a URI identifies a resource (Euskadi), but a resource can have different representations of the same content (An HTML page describing Euskadi, RDF data describing Euskadi, etc.). [Content negotiation](https://tools.ietf.org/html/rfc7231#section-3.4) is the process by which the server provides the appropriate representation for each client, according to the MIME type of the `Accept` header provided by the client (`text/html` for a web browser, `application/rdf+xml` for an RDF agent, etc.).
 
 The content negotiation process at Open Data Euskadi is designed in the same way as in DBpedia. There is a URI with the token `id` (`resource` in DBpedia), and the content negotiation process redirects the client with HTTP 303 codes to the appropriate URLs containing representations (`page` or `data` URLs). In the case of Open Data Euskadi there is an additional consideration since there are two types of pages: pages that represent only data (`doc`) and pages that represent web content that was transposed to RDF (`page`) (See section "Relation between Web content and Named Graphs in the Triple Store" bellow). 
 
@@ -104,36 +103,88 @@ This excerpt from a DCAT file shows the appropriate triples (Not all the triples
 ```
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dc: <http://purl.org/dc/terms/> .
+@prefix dc11: <http://purl.org/dc/elements/1.1/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ns0: <http://www.w3.org/2006/time#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix schema: <http://schema.org/> .
 @prefix void: <http://rdfs.org/ns/void#> .
+@prefix schema: <http://schema.org/> .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 
-# The main dataset has two distributions: a CSV file and the RDF stored in the Triple Store
-<http://data.euskadi.eus/dataset/calidad-aire-en-euskadi-2017/> dcat:distribution 
-	<http://data.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/es/csv>, 
-	<http://data.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/lod> .
+<http://data.euskadi.eus/dataset/bopv-european-legislation-identifier-eli/>
+  a dcat:Dataset ;
+  dc:identifier "http://data.euskadi.eus/dataset/bopv-european-legislation-identifier-eli/" ;
+  dc11:language "es", "eu" ;
+  dc:title "Legislación de la Comunidad Autónoma de Euskadi (BOPV) - European Legislation Identifier (ELI)"@es, "Euskal Autonomia Erkidegoan Legedia (EHAA) - European Legislation Identifier (ELI)"@eu ;
+  dc:description "Este conjunto de datos contiene la legislación de la Comunidad Autónoma de Euskadi."@es, "Datu-sorta honek Euskal Autonomia Erkidegoan legedia du."@eu ;
+  dcat:distribution <http://data.euskadi.eus/distribution/eli-1936-1999/ttl>, <http://data.euskadi.eus/distribution/eli-2000-2015/ttl>, <http://data.euskadi.eus/distribution/eli-2016-2018/ttl>, <http://data.euskadi.eus/distribution/bopv-european-legislation-identifier-eli/lod> ;
+  dcat:keyword "normas"@es, "normativa"@es, "leyes"@es, "país vasco"@es, "euskadi"@es, "decreto"@es, "orden"@es, "ley"@es, "instrucción"@es, "directiva"@es, "circular"@es, "acuerdo"@es, "recurso"@es, "reglamento"@es, "resolución"@es, "decisión"@es, "BOPV"@es, "legegunea"@es, "arauak"@eu, "arautegia"@eu, "legedia"@eu, "euskadi"@eu, "dekretua"@eu, "agindua"@eu, "legea"@eu, "jarraibidea"@eu, "orientabidea"@eu, "zuzentaraua"@eu, "akordioa"@eu, "erreglamendua"@eu, "zirkularra"@eu, "eskumena"@eu, "ebazpena"@eu, "hitzarmena"@eu, "erabakia"@eu, "EHAA"@eu, "legegunea"@eu ;
+  dcat:theme <http://datos.gob.es/kos/sector-publico/sector/sector-publico>, <http://datos.gob.es/kos/sector-publico/sector/legislacion-justicia> ;
+  dc:publisher <http://datos.gob.es/recurso/sector-publico/org/Organismo/A16003011> ;
+  dc:license <https://creativecommons.org/licenses/by/4.0/deed.es_ES> ;
+  dc:references <http://www.legegunea.euskadi.eus/x59-formbusa/es/contenidos/recurso_tecnico/legesarea_comun/es_busqueda/index.html#normativa>, <http://www.legegunea.euskadi.eus/x59-formbusa/eu/contenidos/recurso_tecnico/legesarea_comun/eu_busqueda/index.html#normativa>, <http://www.legegunea.euskadi.eus/x59-home/es/>, <http://www.legegunea.euskadi.eus/x59-home/eu>, <http://opendata.euskadi.eus/como-utilizar-datos/>, <http://opendata.euskadi.eus/datuak-nola-erabili/>, <http://opendata.euskadi.eus/como-reutilizar/-/contenidos/informacion/api_buscador_euskadinet/es_java/como_utilizar.html>, <http://opendata.euskadi.eus/nola-berrerabili/-/contenidos/informacion/api_buscador_euskadinet/eu_java/como_utilizar.html>, <http://opendata.euskadi.eus/w79-resformx/es/w79-resformx/es?r01kQry=tC:euskadi;tF:opendata;tT:ds_juridicos;m:contentName.LIKE.normas_leyes_euskadi,documentLanguage.EQ.es;p:Inter;>, <http://opendata.euskadi.eus/w79-resformx/eu/w79-resformx/eu?r01kQry=tC:euskadi;tF:opendata;tT:ds_juridicos;m:contentName.LIKE.normas_leyes_euskadi,documentLanguage.EQ.eu;p:Inter;> ;
+  dc:spatial <http://datos.gob.es/recurso/sector-publico/territorio/autonomia/pais-vasco> ;
+  dc:accrualPeriodicity [
+    a dc:Frequency ;
+    rdf:value [
+      a <http://www.w3.org/2006/time#DurationDescription> ;
+      ns0:weeks 1 ;
+      rdfs:label "Semanal"
+    ]
+  ] ;
+  dc:temporal [
+    a dc:PeriodOfTime, ns0:Interval ;
+    ns0:hasEnd [
+      a ns0:Instant ;
+      ns0:inXSDDateTime "2018-04-23T00:00:00"^^xsd:dateTime
+    ] ;
+    ns0:hasBeginning [
+      a ns0:Instant ;
+      ns0:inXSDDateTime "1936-01-01T00:00:00"^^xsd:dateTime
+    ]
+  ] ;
+  dc:issued "2018-04-16T00:00:00"^^xsd:date ;
+  dc:modified "2018-04-23T00:00:00"^^xsd:date .
 
-# CSV distribution	
-<http://data.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/es/csv>
+<http://data.euskadi.eus/distribution/eli-1936-1999/ttl>
   a dcat:Distribution ;
   dc:format [
     a dc:IMT ;
-    rdfs:label "CSV" ;
-    rdf:value "text/csv"
+    rdfs:label "RDF-Turtle" ;
+    rdf:value "text/turtle"
   ] ;
-  dcat:byteSize 0.0 ;
-  dcat:accessURL "http://data.euskadi.eus/contenidos/ds_informes_estudios/calidad_aire_2017/es_def/adjuntos/datos_diarios_csv.zip"^^xsd:anyURI ;
-  dc:title "Calidad del aire"@es .	
-	
-# Linked Data distribution
-<http://data.euskadi.eus/distribution/calidad-aire-en-euskadi-2017/lod> a dcat:Distribution, void:Dataset, schema:Distribution ;
-sd:namedGraph <http://data.euskadi.eus/graph/calidad-aire-en-euskadi-2017>;
-void:sparqlEndpoint <http://data.euskadi.eus/sparql/> ;
-dc:modified "2008-11-17"^^xsd:date ;
-dc:title "Calidad del aire Linked Data"@es .
+  dcat:byteSize 28014712.0 ;
+  dcat:accessURL "http://opendata.euskadi.eus/contenidos/ds_juridicos/dataset_eli/opendata/dataset_eli_1936_1999.ttl"^^xsd:anyURI ;
+  dc:title "Legislación BOPV (1936-1999) - ELI"@es, "EHAA Legedia (1936-1999) - ELI"@eu .
+
+<http://data.euskadi.eus/distribution/eli-2000-2015/ttl>
+  a dcat:Distribution ;
+  dc:format [
+    a dc:IMT ;
+    rdfs:label "RDF-Turtle" ;
+    rdf:value "text/turtle"
+  ] ;
+  dcat:byteSize 125860268.0 ;
+  dcat:accessURL "http://opendata.euskadi.eus/contenidos/ds_juridicos/dataset_eli/opendata/dataset_eli_2000_2015.ttl"^^xsd:anyURI ;
+  dc:title "Legislación BOPV (2000-2015) - ELI"@es, "EHAA Legedia (2000-2015) - ELI"@eu .
+
+<http://data.euskadi.eus/distribution/eli-2016-2018/ttl>
+  a dcat:Distribution ;
+  dc:format [
+    a dc:IMT ;
+    rdfs:label "RDF-Turtle" ;
+    rdf:value "text/turtle"
+  ] ;
+  dcat:byteSize 34398013.0 ;
+  dcat:accessURL "http://opendata.euskadi.eus/contenidos/ds_juridicos/dataset_eli/opendata/dataset_eli_2016_2018.ttl"^^xsd:anyURI ;
+  dc:title "Legislación BOPV (2016-2018) - ELI"@es, "EHAA Legedia (2016-2018) - ELI"@eu .
+
+<http://data.euskadi.eus/distribution/bopv-european-legislation-identifier-eli/lod>
+  a dcat:Distribution, void:Dataset, schema:Distribution ;
+  sd:namedGraph <http://data.euskadi.eus/graph/bopv-european-legislation-identifier-eli> ;
+  void:sparqlEndpoint <http://data.euskadi.eus/sparql/> ;
+  dc:title "Legislación BOPV - ELI (Linked Data)"@es, "EHAA Legedia - ELI (Linked Data)"@eu .
 
 ```
 
