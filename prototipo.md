@@ -188,6 +188,25 @@ This excerpt from a DCAT file shows the appropriate triples (Not all the triples
 
 ```
 
+The most important triples are summarised bellow:
+
+```
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix schema: <http://schema.org/> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+
+<http://data.euskadi.eus/dataset/bopv-european-legislation-identifier-eli/>
+  a dcat:Dataset ;
+  dcat:distribution <http://data.euskadi.eus/distribution/eli-1936-1999/ttl>, <http://data.euskadi.eus/distribution/eli-2000-2015/ttl>, <http://data.euskadi.eus/distribution/eli-2016-2018/ttl>, <http://data.euskadi.eus/distribution/bopv-european-legislation-identifier-eli/lod> .
+
+<http://data.euskadi.eus/distribution/bopv-european-legislation-identifier-eli/lod>
+  a dcat:Distribution, void:Dataset, schema:Distribution ;
+  sd:namedGraph <http://data.euskadi.eus/graph/bopv-european-legislation-identifier-eli> .
+```
+
+![DCAT triples](img/dcat-redux.png)
+
 This means that SPARQL can be used to [query data and metadata]().
 
 ## Relation between Web content and Named Graphs in the Triple Store
